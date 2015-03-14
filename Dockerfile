@@ -1,15 +1,15 @@
-# Creating a Docker container containing chef-container/chef-init
+# Creating a Docker container containing Chef Client 12.x
 #
-# Start from Phusion's optimized Docker baseimage
-# For more info:
-# http://phusion.github.io/baseimage-docker/
+# Start from Ubuntu 14.04.2
 #
-FROM phusion/baseimage:0.9.15
+FROM ubuntu:14.04.2
 
-MAINTAINER Ringo De Smet <ringo@automate-dev.com>
+MAINTAINER Ringo De Smet <ringo@releasequeue.com>
 
-# Replicating the setup from:
-# https://github.com/opscode/chef-container/blob/master/Dockerfiles/ubuntu-14.04/Dockerfile.erb
 RUN apt-get -yqq update
 RUN apt-get -yqq install curl lsb-release
-RUN curl -L https://getchef.com/chef/install.sh | bash -s -- -v 11.16.2 -P container
+RUN curl -L https://getchef.com/chef/install.sh | bash -s -- -v 12.0.3-1
+RUN apt-get -yqq clean
+
+# Make Chef available as a volume
+VOLUME /opt/chef
