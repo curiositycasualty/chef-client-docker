@@ -1,4 +1,4 @@
-# Creating a Docker container containing Chef Client 12.x
+# Creating a Docker container containing Chef Client 11.x
 #
 # https://www.chef.io/download-chef-client/
 #
@@ -9,7 +9,7 @@ MAINTAINER Ringo De Smet <ringo@releasequeue.com>
 
 RUN apt-get -yqq update
 RUN apt-get -yqq install curl lsb-release
-RUN curl -L https://www.chef.io/chef/install.sh | sudo bash -s -- -v 12.1.1-1
+RUN curl -L https://www.chef.io/chef/install.sh | sudo bash -s -- -v 11.18.6-1
 RUN apt-get -yqq clean
 
 # Make Chef available as a volume
