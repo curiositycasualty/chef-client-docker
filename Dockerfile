@@ -1,16 +1,13 @@
-# Creating a Docker container containing Chef Client 12.x
-#
-# https://www.chef.io/download-chef-client/
-#
-# Start from Ubuntu 14.04.2 Docker images
 FROM ubuntu:16.04
 
-MAINTAINER Ringo De Smet <ringo@releasequeue.com>
+RUN apt-get -yqq update && \
+    apt-get -yqq install \
+      wget \
+      lsb-release \
+      sudo && \
+    wget --no-verbose \
+         https://packages.chef.io/files/stable/chef/12.20.3/ubuntu/16.04/chef_12.20.3-1_amd64.deb && \
+    sudo dpkg -i ./chef_* && \
+    apt-get -yqq clean
 
-RUN apt-get -yqq update
-RUN apt-get -yqq install curl lsb-release sudo
-RUN curl -v -L http://www.chef.io/chef/install.sh | sudo bash -s -- -v 12.19.37 -c current
-RUN apt-get -yqq clean
-
-# Make Chef available as a volume
 VOLUME /opt/chef
